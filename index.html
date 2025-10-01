@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✨ Esencia - Conexiones Auténticas del Alma</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #8b5cf6;
+  --secondary: #06b6d4;
+  --tertiary: #10b981;
+  --accent: #f59e0b;
+  --danger: #ef4444;
+  --dark: #0f172a;
+  --card: #1e293b;
+  --glass: rgba(255,255,255,0.04);
+  --border: rgba(255,255,255,0.08);
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --mystic: #c084fc;
+  --radius: 12px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: radial-gradient(ellipse at top left, #1e1b4b 0%, var(--dark) 50%, #0c4a6e 100%);
+  color: var(--text);
+  min-height: 100vh;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app {
+  width: 100%;
+  max-width: 1200px;
+  margin: 24px auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 500px 1fr;
+  gap: 20px;
+}
+
+.card {
+  background: linear-gradient(145deg, var(--card), #334155);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.45);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary), var(--tertiary));
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 28px;
+  background: linear-gradient(135deg, var(--primary), var(--mystic));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.tagline {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 18px;
+  font-style: italic;
+}
+
+h2 { font-size: 18px; color: var(--text); margin-bottom: 8px; }
+h3 { font-size: 16px; color: var(--primary); margin-bottom: 8px; }
+h4 { font-size: 16px; color: var(--text); margin-bottom: 4px; }
+
+.lead { color: var(--muted); font-size: 14px; margin-bottom: 12px; }
+.small { font-size: 12px; color: var(--muted); }
+
+.form-group { margin-bottom: 14px; }
+
+label {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--glass);
+  color: var(--text);
+  font-size: 14px;
+  transition: all 0.3s;
+  font-family: inherit;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+}
+
+textarea { min-height: 96px; resize: vertical; }
+
+.controls { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+
+.btn {
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.btn-primary { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; }
+.btn-secondary { background: transparent; border: 1px solid var(--border); color: var(--text); }
+.btn-success { background: linear-gradient(135deg, var(--tertiary), #059669); color: #fff; }
+.btn-warning { background: linear-gradient(135deg, var(--accent), #d97706); color: #fff; }
+.btn-mystic { background: linear-gradient(135deg, var(--mystic), var(--primary)); color: #fff; }
+.btn-danger { background: linear-gradient(135deg, var(--danger), #dc2626); color: #fff; }
+
+.notification {
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--glass);
+  border-left: 4px solid var(--primary);
+  margin-bottom: 10px;
+}
+
+.notification.success { border-left-color: var(--tertiary); background: rgba(16, 185, 129, 0.1); }
+.notification.warning { border-left-color: var(--accent); background: rgba(245, 158, 11, 0.1); }
+.notification.danger { border-left-color: var(--danger); background: rgba(239, 68, 68, 0.1); }
+.notification.mystic { border-left-color: var(--mystic); background: rgba(192, 132, 252, 0.1); }
+
+.hidden { display: none !important; }
+.fade-in { animation: fadeIn 0.45s ease-out forwards; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  transition: opacity 0.3s ease-out;
+}
+
+.modal {
+  background: var(--card);
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
+
+.modal h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.modal p {
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.modal ul {
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+
+.modal li {
+  margin-bottom: 8px;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 20px 0;
+  padding: 15px;
+  background: var(--glass);
+  border-radius: 12px;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  cursor: pointer;
+  accent-color: var(--primary);
+}
+
+.checkbox-group label {
+  margin: 0;
+  cursor: pointer;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+  20%, 40%, 60%, 80% { transform: translateX(10px); }
+}
+
+@media (max-width: 1024px) {
+  .app { grid-template-columns: 1fr; padding: 14px; }
+}
+
+@media (max-width: 768px) {
+  .controls { flex-direction: column; }
+  .controls .btn { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- Modal de consentimiento -->
+<div id="consent-modal" class="modal-overlay">
+  <div class="modal">
+    <h2>⚖️ Términos de Uso y Consentimiento</h2>
+    
+    <div class="notification warning">
+      <strong>Proyecto Personal - Prototipo Experimental</strong>
+    </div>
+    
+    <p><strong>Al usar esta aplicación, reconoces y aceptas:</strong></p>
+    
+    <ul>
+      <li><strong>Naturaleza experimental:</strong> Esta es una aplicación de demostración sin validación científica real.</li>
+      <li><strong>Sin garantías:</strong> Los cálculos de "compatibilidad" son algoritmos básicos, no ciencia probada.</li>
+      <li><strong>Astrología:</strong> Las referencias astrológicas son entretenimiento, no tienen base científica.</li>
+      <li><strong>Privacidad:</strong> Tus datos se guardan solo en tu navegador (localStorage). No hay servidor externo.</li>
+      <li><strong>Uso personal:</strong> Esta app es un proyecto personal, no un servicio comercial regulado.</li>
+      <li><strong>Sin responsabilidad:</strong> El creador no asume responsabilidad por decisiones tomadas basándose en esta app.</li>
+    </ul>
+    
+    <p class="small" style="margin-top: 20px; opacity: 0.8;">
+      Esta aplicación es un ejercicio creativo de diseño de interfaces y algoritmos de matching. No debe sustituir tu propio juicio en relaciones personales.
+    </p>
+    
+    <div class="checkbox-group">
+      <input type="checkbox" id="consent-checkbox">
+      <label for="consent-checkbox">
+        He leído y acepto estos términos. Entiendo que esto es un proyecto experimental sin validación científica.
+      </label>
+    </div>
+    
+    <div class="controls">
+      <button class="btn btn-primary" id="btn-accept-terms" disabled>
+        <i class="fas fa-check"></i> Aceptar y Continuar
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="app">
+  <div class="card">
+    <div class="logo">✨ Esencia</div>
+    <div class="tagline">Donde las almas se reconocen antes que los ojos</div>
+
+    <div id="onboarding-phase">
+      <div id="step-1" class="onboarding-step">
+        <h2><i class="fas fa-user-circle"></i> Tu esencia básica</h2>
+        <p class="lead">Empecemos conociendo lo fundamental.</p>
+        
+        <div class="form-group">
+          <label for="user-name"><i class="fas fa-signature"></i> Nombre</label>
+          <input type="text" id="user-name" placeholder="Tu nombre..." maxlength="30" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="user-age"><i class="fas fa-calendar-alt"></i> Edad</label>
+          <input type="number" id="user-age" min="18" max="80" placeholder="25" required>
+        </div>
+        
+        <div class="controls">
+          <button class="btn btn-primary" id="btn-step1-next">
+            <i class="fas fa-arrow-right"></i> Continuar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="matching-phase" class="hidden">
+      <h2><i class="fas fa-magic"></i> Centro de Comando</h2>
+      <div class="notification success">
+        <strong><i class="fas fa-check-circle"></i> Sistema Activo</strong><br>
+        Compatibilidad basada en valores profundos + astrología.
+      </div>
+      
+      <div class="controls">
+        <button class="btn btn-danger" id="btn-reset">
+          <i class="fas fa-refresh"></i> Reiniciar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><i class="fas fa-heart-pulse"></i> Almas Compatibles</h2>
+    <p class="lead">Conexiones basadas en valores profundos y astrología.</p>
+    
+    <div id="matches-container">
+      <div class="notification">
+        <i class="fas fa-hourglass-half"></i> Completa tu evaluación para ver matches.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  const STORAGE_KEY = 'esencia_user_v5';
+  const CONSENT_KEY = 'esencia_consent_v5';
+
+  // ============================================
+  // SISTEMA DE CONSENTIMIENTO
+  // ============================================
+
+  const consentCheckbox = document.getElementById('consent-checkbox');
+  const btnAcceptTerms = document.getElementById('btn-accept-terms');
+  const consentModal = document.getElementById('consent-modal');
+
+  console.log('═══════════════════════════════════════════════════════');
+  console.log('  SISTEMA DE CONSENTIMIENTO CARGADO');
+  console.log('═══════════════════════════════════════════════════════');
+
+  function initConsentSystem() {
+    const hasConsent = localStorage.getItem(CONSENT_KEY) === 'true';
+    
+    console.log('Estado de consentimiento:', hasConsent ? 'ACEPTADO ✓' : 'PENDIENTE ⚠');
+    
+    if (hasConsent) {
+      consentModal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+      console.log('✓ Acceso concedido - Modal oculto');
+      initializeApp();
+      return;
+    }
+    
+    consentModal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    console.log('⚠ Esperando aceptación de términos');
+    console.log('  - Modal visible: SÍ');
+    console.log('  - Checkbox marcado: NO');
+    console.log('  - Botón habilitado: NO');
+  }
+
+  // Event listener del checkbox
+  if (consentCheckbox && btnAcceptTerms) {
+    consentCheckbox.addEventListener('change', function() {
+      btnAcceptTerms.disabled = !this.checked;
+      
+      if (this.checked) {
+        btnAcceptTerms.style.opacity = '1';
+        btnAcceptTerms.style.cursor = 'pointer';
+        console.log('✓ Checkbox marcado - Botón HABILITADO');
+      } else {
+        btnAcceptTerms.style.opacity = '0.6';
+        btnAcceptTerms.style.cursor = 'not-allowed';
+        console.log('⚠ Checkbox desmarcado - Botón DESHABILITADO');
+      }
+    });
+
+    // Event listener del botón aceptar
+    btnAcceptTerms.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      if (!consentCheckbox.checked) {
+        alert('⚠️ Por favor, marca la casilla para aceptar los términos.');
+        console.log('❌ Intento de aceptar sin marcar checkbox - BLOQUEADO');
+        return;
+      }
+      
+      console.log('→ Procesando aceptación de términos...');
+      
+      try {
+        localStorage.setItem(CONSENT_KEY, 'true');
+        console.log('✓ Consentimiento guardado en localStorage');
+        
+        if (localStorage.getItem(CONSENT_KEY) !== 'true') {
+          throw new Error('Verificación falló');
+        }
+        
+        console.log('✓ Verificación exitosa');
+        console.log('→ Cerrando modal...');
+        
+        consentModal.style.opacity = '0';
+        
+        setTimeout(() => {
+          consentModal.style.display = 'none';
+          document.body.style.overflow = 'auto';
+          console.log('✓ Modal cerrado - Acceso concedido');
+          console.log('═══════════════════════════════════════════════════════\n');
+          initializeApp();
+        }, 300);
+        
+      } catch (error) {
+        console.error('❌ ERROR al guardar consentimiento:', error);
+        alert('❌ Error al guardar tu consentimiento. Por favor, verifica que tu navegador permita localStorage.');
+      }
+    });
+
+    console.log('✓ Event listeners configurados correctamente');
+  } else {
+    console.error('❌ ERROR: No se encontraron elementos del DOM');
+    console.error('  - Checkbox:', consentCheckbox ? 'OK' : 'FALTA');
+    console.error('  - Botón:', btnAcceptTerms ? 'OK' : 'FALTA');
+  }
+
+  // Prevenir cierre con ESC
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && consentModal && consentModal.style.display !== 'none') {
+      e.preventDefault();
+      console.log('⚠ ESC bloqueado - Usuario debe aceptar términos');
+    }
+  });
+
+  // Prevenir click fuera del modal
+  if (consentModal) {
+    consentModal.addEventListener('click', function(e) {
+      if (e.target === consentModal) {
+        e.preventDefault();
+        const modal = consentModal.querySelector('.modal');
+        if (modal) {
+          modal.style.animation = 'shake 0.5s';
+          setTimeout(() => {
+            modal.style.animation = '';
+          }, 500);
+        }
+        console.log('⚠ Click fuera bloqueado - Usuario debe aceptar términos');
+      }
+    });
+  }
+
+  // Función para resetear (desarrollo)
+  window.resetConsent = function() {
+    localStorage.removeItem(CONSENT_KEY);
+    localStorage.removeItem(STORAGE_KEY);
+    console.log('🔄 Consentimiento reseteado - Recarga la página');
+  };
+
+  // ============================================
+  // APLICACIÓN PRINCIPAL
+  // ============================================
+
+  function initializeApp() {
+    console.log('🚀 Inicializando aplicación...');
+    setupEventListeners();
+    loadUserData();
+  }
+
+  function setupEventListeners() {
+    const btnStep1Next = document.getElementById('btn-step1-next');
+    const btnReset = document.getElementById('btn-reset');
+    
+    if (btnStep1Next) {
+      btnStep1Next.addEventListener('click', function() {
+        const name = document.getElementById('user-name').value.trim();
+        const age = document.getElementById('user-age').value;
+        
+        if (!name || !age) {
+          alert('Por favor completa todos los campos');
+          return;
+        }
+        
+        if (age < 18 || age > 80) {
+          alert('La edad debe estar entre 18 y 80 años');
+          return;
+        }
+        
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ name, age }));
+        showMatchingPhase();
+      });
+    }
+    
+    if (btnReset) {
+      btnReset.addEventListener('click', function() {
+        if (confirm('¿Reiniciar todo? Se perderán tus datos.')) {
+          localStorage.removeItem(STORAGE_KEY);
+          localStorage.removeItem(CONSENT_KEY);
+          location.reload();
+        }
+      });
+    }
+  }
+
+  function loadUserData() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      try {
+        const user = JSON.parse(saved);
+        if (user && user.name) {
+          showMatchingPhase();
+        }
+      } catch (e) {
+        console.error('Error cargando datos:', e);
+      }
+    }
+  }
+
+  function showMatchingPhase() {
+    document.getElementById('onboarding-phase').classList.add('hidden');
+    document.getElementById('matching-phase').classList.remove('hidden');
+    
+    const matchesContainer = document.getElementById('matches-container');
+    if (matchesContainer) {
+      matchesContainer.innerHTML = '<div class="notification success"><strong>¡Perfil creado!</strong><br>Sistema funcionando correctamente.</div>';
+    }
+  }
+
+  // INICIALIZAR
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initConsentSystem);
+  } else {
+    initConsentSystem();
+  }
+
+  console.log('Para resetear: window.resetConsent()');
+  console.log('═══════════════════════════════════════════════════════\n');
+
+})();
+</script>
+</body>
+</html>
